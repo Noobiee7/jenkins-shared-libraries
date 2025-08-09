@@ -1,10 +1,17 @@
 def call(String imageName, String dockerHubUser, String tagName, String name, String acrName){
-withCredentials([usernamePassword(credentialsId: 'acrCred', usernameVariable: 'dockerHubUser', passwordVariable: 'dockerHubPass')]) {
-        sh 'az login --service-principal --username $APP_ID --password $PASSWORD --tenant 11c0a18b-b9dd-43aa-b740-c285e47c2d2b'
+withCredentials([usernamePassword(credentialsId: "acrCred", usernameVariable: "AZURE_CLIENT_ID", passwordVariable: "AZURE_CLIENT_SECRET")]) {
+        sh """
+        set +x
+        az login --service-principal \ 
+        --username $AZURE_CLIENT_ID \
+        --password $AZURE_CLIENT_SECRET \ 
+        --tenant 11c0a18b-b9dd-43aa-b740-c285e47c2d2b 
+        set -x
+        """
     }
-    sh '''    
+    sh """    
         az acr login --name $name
         docker tag $dockerHubUser/$imageName:$tagName $acrName/$imageName:$tagName
         docker push $acrName/$imageName:$tagName
-    '''
+    """
 }
