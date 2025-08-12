@@ -1,4 +1,4 @@
-def call(String appName, String rgName, String acrName, String imageName, String tagName){
+def call(String appName, String rgName, String acrurl, String imageName, String tag){
   withCredentials([usernamePassword(credentialsId: "acrCred", usernameVariable: "AZURE_CLIENT_ID", passwordVariable: "AZURE_CLIENT_SECRET" )]){
     sh """
     set +x
@@ -6,7 +6,7 @@ def call(String appName, String rgName, String acrName, String imageName, String
     """
   //configure Web app
   sh """
-  az webapp config container set --name $appName --resource-group $rgName --docker-custom-image-name $acrName/$imageName:$tagName --docker-registry-server-url https://$acrName
+  az webapp config container set --name $appName --resource-group $rgName --docker-custom-image-name $acrurl/$imageName:$tag --docker-registry-server-url https://$acrName
 
   az webapp restart --name $appName --resource-group $rgName
   
