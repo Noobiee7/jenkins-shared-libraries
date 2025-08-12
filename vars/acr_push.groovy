@@ -1,4 +1,4 @@
-def call(String $acrName, String acrurl, String imageName, String tagName){
+def call(String $acrName, String acrurl, String imageName, String tag){
   def call(String imageName, String dockerHubUser, String tagName, String name, String acrName){
 withCredentials([usernamePassword(credentialsId: "acrCred", usernameVariable: "AZURE_CLIENT_ID", passwordVariable: "AZURE_CLIENT_SECRET")]) {
         sh """
@@ -9,6 +9,6 @@ withCredentials([usernamePassword(credentialsId: "acrCred", usernameVariable: "A
     }
     sh "
         az acr login -name $acrName
-        docker push $acrurl/$imageName:$tagName
+        docker push $acrurl/$imageName:$tag
     "
 }
