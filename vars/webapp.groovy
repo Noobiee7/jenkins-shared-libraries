@@ -7,7 +7,7 @@ def call(String appName, String rgName, String acrurl, String imageName, String 
     """
   //configure Web app
   sh """
-  az webapp config container set --name $appName --resource-group $rgName --docker-custom-image-name $acrurl/$imageName:$tag --docker-registry-server-url https://$acrName
+  az webapp config container set --name $appName --resource-group $rgName --docker-custom-image-name $acrurl/$imageName:$tag --docker-registry-server-url https://$acrurl
 
   az webapp restart --name $appName --resource-group $rgName
   
