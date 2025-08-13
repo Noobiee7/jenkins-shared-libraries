@@ -1,5 +1,4 @@
 def call(String $acrName, String acrurl, String imageName, String tag){
-//  def call(String imageName, String dockerHubUser, String tagName, String name, String acrName){
 withCredentials([usernamePassword(credentialsId: "acrCred", usernameVariable: "AZURE_CLIENT_ID", passwordVariable: "AZURE_CLIENT_SECRET")]) {
         sh """
         set +x
