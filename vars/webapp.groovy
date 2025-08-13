@@ -3,7 +3,7 @@ def call(String appName, String rgName, String acrurl, String imageName, String 
     sh """
     set +x
     az login --service-principal --username $AZURE_CLIENT_ID --password $AZURE_CLIENT_SECRET --tenant 11c0a18b-b9dd-43aa-b740-c285e47c2d2b
-    ser -x
+    set -x
     """
   //configure Web app
   sh """
