@@ -7,7 +7,7 @@ withCredentials([usernamePassword(credentialsId: "acrCred", usernameVariable: "A
         """
     }
     sh """
-        az acr login -name ${acrName}
+        az acr login --name ${acrName}
         docker push $acrurl/$imageName:$tag
     """
 }
