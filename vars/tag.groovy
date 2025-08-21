@@ -1,3 +1,3 @@
-def call(String imageName, String acrurl){
-  sh 'docker tag $imageName $acrurl/$imageName:latest'
+def call(String imageName, String acrurl, String tag){
+  sh 'docker tag $imageName $acrurl/$imageName:$tag'
 }
